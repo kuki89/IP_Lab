@@ -1,0 +1,176 @@
+﻿<UserControl xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="IP_Lab.Page.PageMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menu="clr-namespace:SilverlightMenu.Library;assembly=SilverlightMenu.Library"
+    mc:Ignorable="d" SizeChanged="UserControl_SizeChanged">
+
+    <UserControl.Resources>
+        <Style x:Key="MenuLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="#FF1D50A3" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Margin" Value="0,0,0,1" />
+        </Style>
+        <LinearGradientBrush x:Key="MenuDividerBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFC0D8F0" Offset="1"/>
+            <GradientStop Color="#FFDBE6F3" Offset="0"/>
+            <GradientStop Color="#FFC1D9F1" Offset="0.685"/>
+            <GradientStop Color="#FFD7E7F5" Offset="0.678"/>
+            <GradientStop Color="#FFDAE6F3" Offset="0.133"/>
+            <GradientStop Color="#FFC7D8ED" Offset="0.174"/>
+            <GradientStop Color="#FFC8D9ED" Offset="0.478"/>
+        </LinearGradientBrush>
+
+        <menu:MenuItem x:Key="mnu_Root" Name="mnuRoot">
+            <menu:MenuItem Name="mnu_topo" Text="拓扑管理">
+                <menu:MenuItem Name="mnu_newtopo" Text="新建"/>
+                <menu:MenuItem Name="mnu_opentopo" Text="打开"/>
+                <menu:MenuItem Name="mnu_openservertopo" Text="打开标准拓扑"/>
+                <menu:MenuItem Name="mnu_savetopo" Text="保存" />
+            </menu:MenuItem>
+            <menu:MenuItem Name="mnu_devmgr" Text="设备管理">
+                <menu:MenuItem Name="mnu_topogenconfig" Text="生成配置"/>
+                <menu:MenuItem Name="mnu_topostartall" Text="启动所有设备"/>
+                <menu:MenuItem Name="mnu_topostopall" Text="停止所有设备"/>
+            </menu:MenuItem>
+            <menu:MenuItem Name="mnu_tools" Text="相关工具">
+                <menu:MenuItem Name="mnu_filecompare" Text="文本比对"/>
+            </menu:MenuItem>
+            <menu:MenuItem Name="mnu_download" Text="相关下载">
+                <menu:MenuItem Name="mnu_vpn" Text="Vpn(外网)"/>
+                <menu:MenuItem Name="mnu_crt" Text="配套SecureCRT软件"/>
+            </menu:MenuItem>
+            <menu:MenuItem Name="mnu_Help" Text="帮助">
+                <menu:MenuItem Name="mnu_ViewHelp" Text="帮助"/>
+            </menu:MenuItem>
+        </menu:MenuItem>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="#FF7297C5" KeyDown="LayoutRoot_KeyDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="40" />
+            <RowDefinition Height ="Auto" />
+        </Grid.RowDefinitions>
+
+        <Path Name="Path1" Data="M0,53 L2,184 C2,184 245,46 509,52 L526,0 z" 
+              Margin="-20,-61,294,0" StrokeThickness="1" UseLayoutRounding="False" 
+              VerticalAlignment="Top" Height="184" Fill="#FF97B6DC" d:LayoutOverrides="VerticalAlignment" 
+              Opacity="0.8" d:IsLocked="True"/>
+        <Path Name="Path2" Data="M29,77 L0,185 C0,185 329,32 652,71 L515,0 z" 
+              Margin="-29,-76,177,0" StrokeThickness="1" UseLayoutRounding="False" 
+              VerticalAlignment="Top" Height="185" d:LayoutOverrides="VerticalAlignment" 
+              Fill="#FFA1C2ED" Opacity="0.8" d:IsLocked="True"/>
+
+        <TextBlock Text="IP和IT工程师仿真训练系统" HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" FontSize="24" FontFamily="Portable User Interface" Grid.Row="0"/>
+
+        <Grid Name="MainGrid" Grid.Row="1">
+            <menu:Menu 
+                x:Name="mnuIPLab"
+                BorderBrush="#FFC0C0C0"
+                TopPanelBrush="White"
+                ImageBackgroundBrush="#FFC0C0C0"
+                FocusBrush="#FFE0E0D0"
+                FocusBorderBrush="#FFC0C0C0"
+                Foreground="Black"
+                Background="#FFF0F0F0"
+                MenuItem="{StaticResource mnu_Root}"
+                MenuItemClicked="mnuIPLab_MenuItemClicked">
+            </menu:Menu>
+
+            <Border x:Name="brdSelect">
+                <Button x:Name="btnSelect" Height="44" HorizontalAlignment="Left" 
+                        Margin="3,25,0,0" VerticalAlignment="Top" Width="44" Click="btnSelect_Click">
+                    <Image Source="../Resource/Image/cmd_select.png"  Height="32" Width="32" />
+                </Button>
+            </Border>
+            <Border x:Name="brdConnect">
+                <Button x:Name="btnConnect" Height="44" HorizontalAlignment="Left" 
+                        Margin="53,25,0,0" VerticalAlignment="Top" Width="44" Click="btnConnect_Click">
+                    <Image Source="../Resource/Image/cmd_connect.png" Height="32" Width="32"/>
+                </Button>
+            </Border>
+
+            <TextBlock Name="tbLabIndex" Text="Welcome to Lab" FontFamily="Verdana" FontSize="20" FontWeight="Bold" Margin="400,45,0,0"/>
+
+            <Grid Name="CanvaGrid" Margin="0,75,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox x:Name="lstDevice" Background="AliceBlue" HorizontalAlignment="Center"
+                             VerticalAlignment="Top" Grid.Column="0" Canvas.ZIndex="64">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="90" Height="90">
+                                <Border BorderThickness="1">
+                                    <Image Source="{Binding IcoImage}" Width="60" Height="60"
+                                           Tag="{Binding IcoTag}" 
+                                           HorizontalAlignment="Center" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                                </Border>
+                                <TextBlock Height="30" Width="60" Text="{Binding IcoText}" FontSize="12" TextAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <ScrollViewer Name="svPaintBoard" 
+                              HorizontalAlignment="Left"  
+                              HorizontalScrollBarVisibility="Auto" 
+                              VerticalScrollBarVisibility="Auto" 
+                              Grid.Column="2">
+                    <ScrollViewer.Content>
+
+                        <Canvas Name="PaintBoard" AllowDrop="True" HorizontalAlignment="Right"
+                                VerticalAlignment="Top" Background="White" 
+                                MouseLeave="PaintBoard_MouseLeave" 
+                                MouseLeftButtonUp="PaintBoard_MouseLeftButtonUp" 
+                                MouseEnter="PaintBoard_MouseEnter" 
+                                MouseLeftButtonDown="PaintBoard_MouseLeftButtonDown">
+                            <!--这个在鼠标拖动过程中显示的图标-->
+                            <Image  Name="Img" Opacity="0.5" Width="60" Height="60"
+                            Visibility="Collapsed"  HorizontalAlignment="Center" />
+                        </Canvas>
+
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+
+                <StackPanel Name="spDetail" VerticalAlignment="Top" Background="#e5eff8" Grid.Column="3">
+                    <StackPanel Orientation="Horizontal" Margin="10 5 0 0">
+                        <TextBlock Name="tbShowCaption" Text="显示" FontFamily="Verdana" FontSize="20" FontWeight="Bold"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10 5 0 0">
+                        <TextBlock Name="tbShowGridLines" Text="显示网格"></TextBlock>
+                        <CheckBox  Name="CbShowGridLines"  IsChecked="false" Click="CbShowGridLines_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10 5 0 0">
+                        <TextBlock Name="tbPaintBoardWidth" Text="容器宽" Margin="0 0 5 0" Width="35" ></TextBlock>
+                        <Slider Name="SliWidth" Maximum="1900" Width="130" ValueChanged="SliWidth_ValueChanged" 
+                                ToolTipService.ToolTip="{Binding Path=Value, ElementName=SliWidth, StringFormat='\{0:N0\}'}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  Margin="10 5 0 0">
+                        <TextBlock Name="tbPaintBoardHeight" Text="容器高"  Margin="0 0 5 0"  Width="35" ></TextBlock>
+                        <Slider Name="SliHeight" Maximum="1520" Width="130" ValueChanged="SliHeight_ValueChanged" 
+                                ToolTipService.ToolTip="{Binding Path=Value, ElementName=SliHeight, StringFormat='\{0:N0\}'}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10 30 0 0">
+                        <TextBlock Name="tbShowConfig" Text="设备配置" FontFamily="Verdana" FontSize="20" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10 5 0 0">
+                        <TextBlock Name="tbHWverison" Text="华为版本" Margin="0 0 10 0" Width="50" ></TextBlock>
+                        <CheckBox  Name="CbHWversion55" Content="55" Margin="0 0 15 0" IsChecked="false" Click="CbHWversion55_Click" />
+                        <CheckBox  Name="CbHWversion57" Content="57" IsChecked="true" Click="CbHWversion57_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>

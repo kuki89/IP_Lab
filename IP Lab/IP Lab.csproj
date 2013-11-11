@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32EA2007-FFE3-47E6-89E0-0E5C19C1F7CD}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IP_Lab</RootNamespace>
+    <AssemblyName>IP Lab</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>zh-Hans</SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>IP Lab.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>IP_Lab.App</SilverlightAppEntry>
+    <TestPageFileName>IP_LabTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="mscorlib" />
+    <Reference Include="SilverlightMenu.Library">
+      <HintPath>Library\SilverlightMenu.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=2.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Config\CiscoRouter\CRStartFile.cs" />
+    <Compile Include="Config\CiscoRouter\CRNetMap.cs" />
+    <Compile Include="Config\CiscoRouter\CRStartAll.cs" />
+    <Compile Include="Config\CiscoSwitcher\CSStartFile.cs" />
+    <Compile Include="Config\CiscoSwitcher\CSNetMap.cs" />
+    <Compile Include="Config\CiscoSwitcher\CSStartAll.cs" />
+    <Compile Include="Config\ConfigFileMgr.cs" />
+    <Compile Include="Config\FileBase.cs" />
+    <Compile Include="Config\Firewasll\FWStartFile.cs" />
+    <Compile Include="Config\Host\HostLinuxStartFile.cs" />
+    <Compile Include="Config\Host\HostXPStartFile.cs" />
+    <Compile Include="Config\HuaWei\HWConfigFileMgr.cs" />
+    <Compile Include="Config\HuaWei\HWHardCfg.cs" />
+    <Compile Include="Config\HuaWei\HWResetAllFile.cs" />
+    <Compile Include="Config\HuaWei\HWResetFile.cs" />
+    <Compile Include="Config\HuaWei\HWStartAllFile.cs" />
+    <Compile Include="Config\HuaWei\HWStartFile.cs" />
+    <Compile Include="Config\Juniper\HostJuniperStartFile.cs" />
+    <Compile Include="Config\Vpcs\VpcsConfigFile.cs" />
+    <Compile Include="Config\Vpcs\VpcsLocalStartFile.cs" />
+    <Compile Include="Config\Vpcs\VpcsStartFile.cs" />
+    <Compile Include="Data\EnumDefine.cs" />
+    <Compile Include="Data\Message\MessageSend.cs" />
+    <Compile Include="Data\Server\Server.cs" />
+    <Compile Include="Data\Server\Topo.cs" />
+    <Compile Include="Data\SystemData.cs" />
+    <Compile Include="Data\UserData.cs" />
+    <Compile Include="Device\Base\DeviceProperty.cs" />
+    <Compile Include="Device\Base\DeviceCard.cs" />
+    <Compile Include="Device\Base\DeviceSocket.cs" />
+    <Compile Include="Device\DeviceBase.cs" />
+    <Compile Include="Device\DeviceList.cs" />
+    <Compile Include="Device\Deivce\Device_ASAFirewall.cs" />
+    <Compile Include="Device\Deivce\Device_CiscoRouter.cs" />
+    <Compile Include="Device\Deivce\Device_CiscoSwitch.cs" />
+    <Compile Include="Device\Deivce\Device_HuaWei.cs" />
+    <Compile Include="Device\Deivce\Device_Juniper.cs" />
+    <Compile Include="Device\Deivce\Device_Linux.cs" />
+    <Compile Include="Device\Deivce\Device_Vpcs.cs" />
+    <Compile Include="Device\Deivce\Device_Windows.cs" />
+    <Compile Include="Device\Link.cs" />
+    <Compile Include="Menu\WS_Function.cs" />
+    <Compile Include="Page\PageLabSelect.xaml.cs">
+      <DependentUpon>PageLabSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\PageLogin.xaml.cs">
+      <DependentUpon>PageLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\PageMain.xaml.cs">
+      <DependentUpon>PageMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\PageSwitcher.xaml.cs">
+      <DependentUpon>PageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MyService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Util\BasicHttpBinding.cs" />
+    <Compile Include="Util\ConfigurationManager.cs" />
+    <Compile Include="Util\Diff.cs" />
+    <Compile Include="Util\Function.cs" />
+    <Compile Include="Util\Gb2312Encoding\GB2312Encoding.cs" />
+    <Compile Include="Util\Gb2312Encoding\Gb2312toUnicodeDictinary.cs" />
+    <Compile Include="Util\IndentifyCode.cs" />
+    <Compile Include="Util\Navigation\NavigationHelper.cs" />
+    <Compile Include="Util\Navigation\TransitionBase.cs" />
+    <Compile Include="Util\Navigation\TransitionCompletedEventArgs.cs" />
+    <Compile Include="Util\Navigation\Transitions\CompositeTransition.cs" />
+    <Compile Include="Util\Navigation\Transitions\FadeTransition.cs" />
+    <Compile Include="Util\Navigation\Transitions\RotateTransition.cs" />
+    <Compile Include="Util\Navigation\Transitions\WipeTransition.cs" />
+    <Compile Include="Util\SingletonGeneric.cs" />
+    <Compile Include="Windows\WndAbout.xaml.cs">
+      <DependentUpon>WndAbout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WndDeviceLink.xaml.cs">
+      <DependentUpon>WndDeviceLink.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WndInformation.xaml.cs">
+      <DependentUpon>WndInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WndServerTopo.xaml.cs">
+      <DependentUpon>WndServerTopo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WndFileCompare.xaml.cs">
+      <DependentUpon>WndFileCompare.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Page\PageLabSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\PageLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\PageMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\PageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndDeviceLink.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndServerTopo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WndFileCompare.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MyService\IPLabWebService.wsdl" />
+    <Resource Include="app.config">
+      <SubType>Designer</SubType>
+    </Resource>
+    <None Include="Properties\AppManifest.xml" />
+    <Resource Include="Resource\Image\server.png" />
+    <Resource Include="Resource\Image\cmd_batch.png" />
+    <Resource Include="Resource\Image\cmd_connect.png" />
+    <Resource Include="Resource\Image\cmd_select.png" />
+    <Resource Include="Resource\Image\cisco-router.png" />
+    <Resource Include="Resource\Image\cisco-switch.png" />
+    <Resource Include="Resource\Image\firewall.png" />
+    <Resource Include="Resource\Image\hw_router.png" />
+    <Resource Include="Resource\Image\juniper.png" />
+    <Resource Include="Resource\Image\linux.png" />
+    <Resource Include="Resource\Image\vpcs.png" />
+    <None Include="Service References\MyService\IPLabWebService.disco" />
+    <None Include="Service References\MyService\configuration91.svcinfo" />
+    <None Include="Service References\MyService\configuration.svcinfo" />
+    <None Include="Service References\MyService\IP_Lab.MyService.ExecuteCommandResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MyService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Resource Include="Resource\Image\topo.png" />
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Image\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Image\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MyService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

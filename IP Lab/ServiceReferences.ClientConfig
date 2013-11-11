@@ -1,0 +1,22 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="IPLabWebServiceSoap"
+                         maxBufferSize="2147483647"
+                         maxReceivedMessageSize="2147483647"
+                         openTimeout="00:3:00"
+                         closeTimeout ="00:3:00"
+                         sendTimeout="00:3:00"
+                         receiveTimeout="00:10:00">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:1549/IP%20Lab.Web/IPLabWebService.asmx"
+                binding="basicHttpBinding" bindingConfiguration="IPLabWebServiceSoap"
+                contract="MyService.IPLabWebServiceSoap" name="IPLabWebServiceSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

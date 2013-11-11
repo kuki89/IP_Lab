@@ -1,0 +1,37 @@
+﻿<controls:ChildWindow x:Class="IP_Lab.Windows.WndDeviceLink"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Width="500" Height="150" 
+           Title="设备连接">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="tbSrc" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" />
+        <TextBlock x:Name="tbDst" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" />
+        
+        <TextBlock x:Name="tbSrcCardText" Height="20" Text="板卡：" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="1" />
+        <TextBlock x:Name="tbSrcPortText" Height="20" Text="端口：" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="3" />
+        <TextBlock x:Name="tbDstCardText" Height="20" Text="板卡：" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" />
+        <TextBlock x:Name="tbDstPortText" Height="20" Text="端口：" VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="3" />
+        
+        <ComboBox Grid.Column="2" Grid.Row="0" Name="cmbSrcCard" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" />
+        <ComboBox Grid.Column="4" Grid.Row="0" Name="cmbSrcSocket" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" />
+        <ComboBox Grid.Column="2" Grid.Row="1" Name="cmbDstCard" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" />
+        <ComboBox Grid.Column="4" Grid.Row="1" Name="cmbDstSocket" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" />
+
+        <Button x:Name="btnOK" Content="确定" Click="OKButton_Click" HorizontalAlignment="Left" Width="75" Height="23" Grid.Row="2"  Grid.Column="4"/>
+        <Button x:Name="btnCancel" Content="取消" Click="CancelButton_Click"  HorizontalAlignment="Right" Width="75" Height="23" Grid.Row="2" Grid.Column="4" />
+    </Grid>
+</controls:ChildWindow>
