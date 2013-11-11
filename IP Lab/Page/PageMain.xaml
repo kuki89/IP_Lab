@@ -132,7 +132,8 @@
                                 MouseLeave="PaintBoard_MouseLeave" 
                                 MouseLeftButtonUp="PaintBoard_MouseLeftButtonUp" 
                                 MouseEnter="PaintBoard_MouseEnter" 
-                                MouseLeftButtonDown="PaintBoard_MouseLeftButtonDown">
+                                MouseLeftButtonDown="PaintBoard_MouseLeftButtonDown"
+                                MouseRightButtonDown="PaintBoard_MouseRightButtonDown">
                             <!--这个在鼠标拖动过程中显示的图标-->
                             <Image  Name="Img" Opacity="0.5" Width="60" Height="60"
                             Visibility="Collapsed"  HorizontalAlignment="Center" />

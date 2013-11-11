@@ -134,84 +134,151 @@ namespace IP_Lab.Page
         #endregion
 
         #region 右键菜单
+
+        ContextMenu cm;
+
+        System.Windows.Controls.MenuItem mi_powerup;
+        System.Windows.Controls.MenuItem mi_stop;
+        System.Windows.Controls.MenuItem mi_login;
+        System.Windows.Controls.MenuItem mi_loginserial;
+        System.Windows.Controls.MenuItem mi_loginssh;
+        System.Windows.Controls.MenuItem mi_loginemul;
+        System.Windows.Controls.MenuItem mi_loginmstsc;
+
         private void Init_ContextMenu()
         {
-            ContextMenu cm = new ContextMenu();
+            cm = new ContextMenu();
 
-            System.Windows.Controls.MenuItem mi_powerup = new System.Windows.Controls.MenuItem();
-            System.Windows.Controls.MenuItem mi_stop = new System.Windows.Controls.MenuItem();
-            System.Windows.Controls.MenuItem mi_login = new System.Windows.Controls.MenuItem();
-            System.Windows.Controls.MenuItem mi_import = new System.Windows.Controls.MenuItem();
-            System.Windows.Controls.MenuItem mi_export = new System.Windows.Controls.MenuItem();
+            mi_powerup = new System.Windows.Controls.MenuItem();
+            mi_stop = new System.Windows.Controls.MenuItem();
+            mi_login = new System.Windows.Controls.MenuItem();
+
+            mi_loginserial = new System.Windows.Controls.MenuItem();
+            mi_loginssh = new System.Windows.Controls.MenuItem();
+            mi_loginemul = new System.Windows.Controls.MenuItem();
+            mi_loginmstsc = new System.Windows.Controls.MenuItem();
 
             mi_powerup.Header = "启动/重启";
             mi_stop.Header = "停止";
             mi_login.Header = "登录";
-            mi_import.Header = "导入配置";
-            mi_export.Header = "导出配置";
+
+            mi_loginserial.Header = "串口登陆";
+            mi_loginssh.Header = "SSH登陆";
+            mi_loginemul.Header = "现场登陆";
+            mi_loginmstsc.Header = "远程桌面 ";
 
             mi_powerup.Click += new RoutedEventHandler(mi_powerup_Click);
             mi_stop.Click += new RoutedEventHandler(mi_stop_Click);
             mi_login.Click += new RoutedEventHandler(mi_login_Click);
-            mi_import.Click += new RoutedEventHandler(mi_import_Click);
-            mi_export.Click += new RoutedEventHandler(mi_export_Click);
+
+            mi_loginserial.Click += new RoutedEventHandler(mi_loginserial_Click);
+            mi_loginssh.Click += new RoutedEventHandler(mi_loginssh_Click);
+            mi_loginemul.Click += new RoutedEventHandler(mi_loginemul_Click);
+            mi_loginmstsc.Click += new RoutedEventHandler(mi_loginmstsc_Click);
 
             cm.Items.Add(mi_powerup);
             cm.Items.Add(mi_stop);
             cm.Items.Add(mi_login);
-            cm.Items.Add(mi_import);
-            cm.Items.Add(mi_export);
+
+            cm.Items.Add(mi_loginserial);
+            cm.Items.Add(mi_loginssh);
+            cm.Items.Add(mi_loginemul);
+            cm.Items.Add(mi_loginmstsc);
 
             ContextMenuService.SetContextMenu(PaintBoard, cm);  //为控件绑定右键菜单
         }
 
         private void mi_powerup_Click(object sender, RoutedEventArgs e)
         {
-            if (sysData.SelectedDeviceList.Count == 0)
-            {
-                MessageBox.Show("请选择需要启动的设备！");
-                return;
-            }
             menu.StartDevice(sysData.SelectedDeviceList);
         }
 
         private void mi_stop_Click(object sender, RoutedEventArgs e)
         {
-            if (sysData.SelectedDeviceList.Count == 0)
-            {
-                MessageBox.Show("请选择需要停止的设备！");
-                return;
-            }
             menu.StopDevice(sysData.SelectedDeviceList);
         }
 
         private void mi_login_Click(object sender, RoutedEventArgs e)
         {
-            if (sysData.SelectedDeviceList.Count == 0)
-            {
-                MessageBox.Show("请选择需要登陆的设备！");
-                return;
-            }
             DeviceBase dev = sysData.SelectedDeviceList[0];
             string index = "" + dev.DP.Index;
             if (dev.DP.Index < 10)
                 index = "0" + index;
-            var u = new Uri(dev.DP.Prefix.ToLower() + index + "://" + dev.DP.Prefix.ToLower() + index, UriKind.RelativeOrAbsolute);
+            var u = new Uri(dev.DP.Prefix.ToLower() + index + "://" 
+                + dev.DP.Prefix.ToLower() + index, UriKind.RelativeOrAbsolute);
             System.Windows.Browser.HtmlPage.Window.Navigate(u, "_blank");
         }
 
-        private void mi_import_Click(object sender, RoutedEventArgs e)
+        private void mi_loginserial_Click(object sender, RoutedEventArgs e)
         {
+            DeviceBase dev = sysData.SelectedDeviceList[0];
+            mi_HostLogin(dev, "Serial");
         }
 
-        private void mi_export_Click(object sender, RoutedEventArgs e)
+        private void mi_loginssh_Click(object sender, RoutedEventArgs e)
         {
+            DeviceBase dev = sysData.SelectedDeviceList[0];
+            mi_HostLogin(dev, "SSH");
         }
 
-        private void LayoutRoot_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void mi_loginemul_Click(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
+            DeviceBase dev = sysData.SelectedDeviceList[0];
+            mi_HostLogin(dev, "emul");
         }
+
+        private void mi_loginmstsc_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceBase dev = sysData.SelectedDeviceList[0];
+            mi_HostLogin(dev, "remotedesk");  
+        }
+
+        private void mi_HostLogin(DeviceBase dev, string logintype)
+        {
+            var u = new Uri(dev.DP.Name + logintype + "://"
+                + dev.DP.Name + logintype, UriKind.RelativeOrAbsolute);
+            System.Windows.Browser.HtmlPage.Window.Navigate(u, "_blank");
+        }
+
+        private void PaintBoard_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sysData.SelectedDeviceList.Count == 0)
+            {
+                MessageBox.Show("请选择需要操作的设备！");
+                e.Handled = true;
+                return;
+            }
+
+            DeviceBase dev = sysData.SelectedDeviceList[0];
+            if (dev.DP.Type == Enum.DeviceType.DEVICE_TYPE_LINUX)
+            {
+                mi_loginserial.Visibility = Visibility.Visible;
+                mi_loginssh.Visibility = Visibility.Visible;
+
+                mi_login.Visibility = Visibility.Collapsed;
+                mi_loginemul.Visibility = Visibility.Collapsed;
+                mi_loginmstsc.Visibility = Visibility.Collapsed;
+            }
+            else if (dev.DP.Type == Enum.DeviceType.DEVICE_TYPE_WINDOWS)
+            {
+                mi_loginemul.Visibility = Visibility.Visible;
+                mi_loginmstsc.Visibility = Visibility.Visible;
+
+                mi_login.Visibility = Visibility.Collapsed;
+                mi_loginserial.Visibility = Visibility.Collapsed;
+                mi_loginssh.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                mi_login.Visibility = Visibility.Visible;
+
+                mi_loginserial.Visibility = Visibility.Collapsed;
+                mi_loginssh.Visibility = Visibility.Collapsed;
+                mi_loginemul.Visibility = Visibility.Collapsed;
+                mi_loginmstsc.Visibility = Visibility.Collapsed;
+            }
+        }
+
         #endregion
 
         #region 拖拽图标

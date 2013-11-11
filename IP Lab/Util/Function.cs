@@ -35,8 +35,8 @@ namespace IP_Lab.Util
 
         public static string GetWebServiceAddress()
         {
-            return "http://202.101.107.126:9999/" + ConfigurationManager.AppSettings["WebService"];
-            //return GetWebAddress() + ConfigurationManager.AppSettings["WebService"];
+            //return "http://202.101.107.126:9999/" + ConfigurationManager.AppSettings["WebService"];
+            return GetWebAddress() + ConfigurationManager.AppSettings["WebService"];
         }
 
         #region Liang-Barsky算法
